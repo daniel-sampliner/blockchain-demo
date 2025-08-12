@@ -1,0 +1,18 @@
+# SPDX-FileCopyrightText: 2025 Daniel Sampliner <samplinerD@gmail.com>
+#
+# SPDX-License-Identifier: GLWTPL
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: nodes
+
+spec:
+  type: ClusterIP
+  selector:
+    app: besu
+  ports:
+    - port: 8545
+      targetPort: 8545
+      protocol: TCP
+      name: json-rpc
