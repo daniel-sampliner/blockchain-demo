@@ -4,7 +4,19 @@
 
 namespace: firefly 
 
+labels:
+  - includeSelectors: true
+    pairs:
+      app: signer
+
 resources:
   - ./configmap.yaml
   - ./namespace.yaml
+  - ./service.yaml
   - ./statefulset.yaml
+
+secretGenerator:
+  - name: signer
+    files:
+      - ./3d55068ef46bd7e7006878375d6ea23c93da458b.key.json
+      - ./3d55068ef46bd7e7006878375d6ea23c93da458b.password

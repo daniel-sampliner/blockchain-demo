@@ -8,13 +8,7 @@ metadata:
   name: signer
 spec:
   replicas: 1
-  selector:
-    matchLabels:
-      app: signer
   template:
-    metadata:
-      labels:
-        app: signer
     spec:
       containers:
         - name: signer
@@ -24,6 +18,10 @@ spec:
             - ffsigner
             - --config
             - /config/config.toml
+          ports:
+            - containerPort: 8545
+              name: json-rpc
+              protocol: TCP
           resources:
             requests:
               cpu: 100m
@@ -34,21 +32,17 @@ spec:
           volumeMounts:
             - name: config
               mountPath: /config
+              readOnly: true
             - name: keystore
               mountPath: /data/keystore
+              readOnly: true
 
       volumes:
         - name: config
           configMap:
             name: signer
-
-  volumeClaimTemplates:
-    - metadata:
-        name: keystore
-      spec:
-        storageClassName: standard
-        accessModes:
-          - ReadWriteOnce
-        resources:
-          requests:
-            storage: 1Gi
+        - name: keystore
+          projected:
+            sources:
+              - secret:
+                  name: signer
