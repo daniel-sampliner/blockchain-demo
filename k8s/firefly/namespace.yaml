@@ -2,7 +2,8 @@
 #
 # SPDX-License-Identifier: GLWTPL
 
-resources:
-  - ./besu-qbft
-  - ./firefly
-  - ./ingress-nginx/deploy-ingress-nginx.yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: firefly
+

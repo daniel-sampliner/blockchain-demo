@@ -1,0 +1,54 @@
+# SPDX-FileCopyrightText: 2025 Daniel Sampliner <samplinerD@gmail.com>
+#
+# SPDX-License-Identifier: GLWTPL
+
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: signer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: signer
+  template:
+    metadata:
+      labels:
+        app: signer
+    spec:
+      containers:
+        - name: signer
+          image: ghcr.io/hyperledger/firefly-signer:v1.1.22
+          imagePullPolicy: IfNotPresent
+          command:
+            - ffsigner
+            - --config
+            - /config/config.toml
+          resources:
+            requests:
+              cpu: 100m
+              memory: 1024Mi
+            limits:
+              cpu: 500m
+              memory: 2048Mi
+          volumeMounts:
+            - name: config
+              mountPath: /config
+            - name: keystore
+              mountPath: /data/keystore
+
+      volumes:
+        - name: config
+          configMap:
+            name: signer
+
+  volumeClaimTemplates:
+    - metadata:
+        name: keystore
+      spec:
+        storageClassName: standard
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 1Gi

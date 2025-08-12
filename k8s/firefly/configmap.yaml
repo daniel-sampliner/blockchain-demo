@@ -1,0 +1,22 @@
+# SPDX-FileCopyrightText: 2025 Daniel Sampliner <samplinerD@gmail.com>
+#
+# SPDX-License-Identifier: GLWTPL
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: signer
+
+data:
+  config.toml: |-
+    fileWallet:
+        path: /data/keystore
+        filenames:
+            with0xPrefix: false
+            primaryExt: '.key.json'
+            passwordExt: '.password'
+    server:
+        address: '127.0.0.1'
+        port: 8545
+    backend:
+      url: http://nodes.besu-qbft.svc.cluster.local:8545
