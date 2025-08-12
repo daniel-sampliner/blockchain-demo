@@ -40,18 +40,18 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: status.podIP                  
-          # livenessProbe:
-          #   httpGet:
-          #     path: /liveness
-          #     port: 8545
-          #   initialDelaySeconds: 60
-          #   periodSeconds: 30
-          # readinessProbe:
-          #   httpGet:
-          #     path: /readiness
-          #     port: 8545
-          #   initialDelaySeconds: 120
-          #   periodSeconds: 30
+          livenessProbe:
+            httpGet:
+              path: /liveness
+              port: 8545
+            initialDelaySeconds: 60
+            periodSeconds: 30
+          readinessProbe:
+            httpGet:
+              path: /readiness
+              port: 8545
+            initialDelaySeconds: 120
+            periodSeconds: 30
           volumeMounts:
             - name: key
               mountPath: /secrets
