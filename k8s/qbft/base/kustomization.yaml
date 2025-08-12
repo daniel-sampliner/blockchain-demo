@@ -1,0 +1,23 @@
+# SPDX-FileCopyrightText: 2025 Daniel Sampliner <samplinerD@gmail.com>
+#
+# SPDX-License-Identifier: GLWTPL
+
+namespace: besu-qbft
+resources:
+  - ./role.yaml
+  - ./rolebinding.yaml
+  - ./secret.yaml
+  - ./service.yaml
+  - ./serviceaccount.yaml
+  - ./statefulset.yaml
+
+replacements:
+  - source:
+      kind: StatefulSet
+      fieldPath: metadata.name
+    targets:
+      - select:
+          kind: StatefulSet
+        fieldPaths:
+          - spec.template.spec.serviceAccountName
+

@@ -9,6 +9,7 @@ in
   shell = pkgs.mkShell {
     packages = builtins.attrValues {
       inherit (pkgs)
+        besu
         kind
         reuse
         ;

@@ -1,0 +1,16 @@
+# SPDX-FileCopyrightText: 2025 Daniel Sampliner <samplinerD@gmail.com>
+#
+# SPDX-License-Identifier: GLWTPL
+
+nameSuffix: "-1"
+
+labels:
+  - includeSelectors: true
+    pairs:
+      instance: node-1
+
+resources:
+  - ../../base
+
+patches:
+  - path: secret.yaml

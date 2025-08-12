@@ -3,5 +3,7 @@
 # SPDX-License-Identifier: GLWTPL
 
 resources:
-  - ./ingress-nginx/deploy-ingress-nginx.yaml
-  - ./qbft
+  - ./node-0
+  - ./node-1
+  - ./node-2
+  - ./node-3

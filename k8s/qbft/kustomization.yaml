@@ -2,6 +2,13 @@
 #
 # SPDX-License-Identifier: GLWTPL
 
+namespace: besu-qbft
+
+labels:
+  - includeTemplates: true
+    pairs:
+      app: besu
+
 resources:
-  - ./ingress-nginx/deploy-ingress-nginx.yaml
-  - ./qbft
+  - ./common
+  - ./overlays

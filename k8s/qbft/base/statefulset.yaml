@@ -1,0 +1,94 @@
+# SPDX-FileCopyrightText: 2025 Daniel Sampliner <samplinerD@gmail.com>
+#
+# SPDX-License-Identifier: GLWTPL
+
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: node
+spec:
+  replicas: 1
+  template:
+    metadata:
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "9545"
+        prometheus.io/path: "/metrics"
+    spec:
+      serviceAccountName: node
+      containers:
+        - name: besu
+          image: hyperledger/besu:24.12.1
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              cpu: 100m
+              memory: 1024Mi
+            limits:
+              cpu: 500m
+              memory: 2048Mi
+          env:
+            - name: POD_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: BESU_P2P_HOST
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP                  
+          volumeMounts:
+            - name: key
+              mountPath: /secrets
+              readOnly: true
+            - name: genesis-config
+              mountPath: /etc/genesis
+              readOnly: true
+            - name: config-toml
+              mountPath: /etc/besu
+              readOnly: true
+            - name: data
+              mountPath: /data
+          ports:
+            - containerPort: 8545
+              name: json-rpc
+              protocol: TCP
+            - containerPort: 8546
+              name: ws
+              protocol: TCP
+            - containerPort: 8547
+              name: graphql
+              protocol: TCP
+            - containerPort: 30303
+              name: rlpx
+              protocol: TCP
+            - containerPort: 30303
+              name: discovery
+              protocol: UDP
+          command:
+            - /bin/sh
+            - -c
+          args:
+            - |
+              exec
+              /opt/besu/bin/besu \
+                --config-file=/etc/besu/config.toml \
+                --Xdns-enabled=true --Xdns-update-enabled=true
+
+      volumes:
+        - name: key
+          secret:
+            secretName: key
+        - name: config-toml
+          configMap:
+            name: nodes
+        - name: genesis-config
+          configMap:
+            name: genesis-json
+        - name: besu-config
+        - name: data
+          emptyDir:
+            sizeLimit: "1Gi"
