@@ -10,6 +10,7 @@ in
     packages = builtins.attrValues {
       inherit (pkgs)
         besu
+        bun
         kind
         reuse
         ;
