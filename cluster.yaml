@@ -15,3 +15,6 @@ nodes:
         hostPort: 8443
         listenAddress: 0.0.0.0
         protocol: TCP
+    extraMounts:
+      - hostPath: kind-data
+        containerPath: /var/local-path-provisioner

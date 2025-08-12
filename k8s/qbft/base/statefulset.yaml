@@ -89,6 +89,14 @@ spec:
           configMap:
             name: genesis-json
         - name: besu-config
-        - name: data
-          emptyDir:
-            sizeLimit: "1Gi"
+
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+      spec:
+        storageClassName: standard
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 1Gi
