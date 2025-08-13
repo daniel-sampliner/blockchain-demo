@@ -7,7 +7,7 @@ kind: StatefulSet
 metadata:
   name: signer
 spec:
-  replicas: 1
+  replicas: 4
   template:
     spec:
       containers:
@@ -15,9 +15,22 @@ spec:
           image: ghcr.io/hyperledger/firefly-signer:v1.1.22
           imagePullPolicy: IfNotPresent
           command:
-            - ffsigner
-            - --config
-            - /config/config.toml
+            - bash
+            - -xeuc
+            - |
+                POD_NUM=${POD_NAME##*-}
+                cat /config/config.yaml - <<-EOF | tee /tmp/config.yaml
+                backend:
+                  url: http://node-${POD_NUM:?}.besu-qbft.svc.cluster.local:8545
+                EOF
+
+                exec ffsigner --config /tmp/config.yaml
+
+          env:
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
           ports:
             - containerPort: 8545
               name: json-rpc
@@ -36,6 +49,8 @@ spec:
             - name: keystore
               mountPath: /data/keystore
               readOnly: true
+            - name: tmp
+              mountPath: /tmp
 
       volumes:
         - name: config
@@ -46,3 +61,6 @@ spec:
             sources:
               - secret:
                   name: signer
+        - name: tmp
+          emptyDir:
+            sizeLimit: 1Mi

@@ -1,0 +1,13 @@
+# SPDX-FileCopyrightText: 2025 Daniel Sampliner <samplinerD@gmail.com>
+#
+# SPDX-License-Identifier: GLWTPL
+
+fileWallet:
+  path: /data/keystore
+  filenames:
+    with0xPrefix: false
+    primaryExt: '.key.json'
+    passwordExt: '.password'
+server:
+  address: '127.0.0.1'
+  port: 8545

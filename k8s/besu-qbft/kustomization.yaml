@@ -4,11 +4,7 @@
 
 namespace: besu-qbft
 
-labels:
-  - includeSelectors: true
-    pairs:
-      app: besu
-
 resources:
-  - ./common
-  - ./overlays
+  - ./besu
+  - ./firefly
+  - ./namespace.yaml

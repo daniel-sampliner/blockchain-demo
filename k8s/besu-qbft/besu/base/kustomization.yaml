@@ -11,6 +11,13 @@ resources:
   - ./serviceaccount.yaml
   - ./statefulset.yaml
 
+configMapGenerator:
+  - name: besu
+    files:
+      - config.toml
+      - genesis.json
+      - static-nodes.json
+
 replacements:
   - source:
       kind: StatefulSet

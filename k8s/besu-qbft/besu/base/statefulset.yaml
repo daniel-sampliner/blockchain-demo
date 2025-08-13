@@ -44,22 +44,19 @@ spec:
             httpGet:
               path: /liveness
               port: 8545
-            initialDelaySeconds: 60
+            initialDelaySeconds: 30
             periodSeconds: 30
           readinessProbe:
             httpGet:
               path: /readiness
               port: 8545
-            initialDelaySeconds: 120
+            initialDelaySeconds: 30
             periodSeconds: 30
           volumeMounts:
             - name: key
               mountPath: /secrets
               readOnly: true
-            - name: genesis-config
-              mountPath: /etc/genesis
-              readOnly: true
-            - name: config-toml
+            - name: config
               mountPath: /etc/besu
               readOnly: true
             - name: data
@@ -94,13 +91,9 @@ spec:
         - name: key
           secret:
             secretName: key
-        - name: config-toml
+        - name: config
           configMap:
-            name: nodes
-        - name: genesis-config
-          configMap:
-            name: genesis-json
-        - name: besu-config
+            name: besu
 
   volumeClaimTemplates:
     - metadata:

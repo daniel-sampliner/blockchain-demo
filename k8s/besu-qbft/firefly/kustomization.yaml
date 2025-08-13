@@ -2,7 +2,7 @@
 #
 # SPDX-License-Identifier: GLWTPL
 
-namespace: firefly 
+namespace: besu-qbft 
 
 labels:
   - includeSelectors: true
@@ -10,10 +10,13 @@ labels:
       app: signer
 
 resources:
-  - ./configmap.yaml
-  - ./namespace.yaml
   - ./service.yaml
   - ./statefulset.yaml
+
+configMapGenerator:
+  - name: signer
+    files:
+      - ./config.yaml
 
 secretGenerator:
   - name: signer

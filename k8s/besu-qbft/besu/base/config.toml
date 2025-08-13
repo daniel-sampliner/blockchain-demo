@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2025 Daniel Sampliner <samplinerD@gmail.com>
+#
+# SPDX-License-Identifier: GLWTPL
+
+data-path = "/data"
+genesis-file = "/etc/besu/genesis.json"
+node-private-key-file = "/secrets/key"
+static-nodes-file = "/etc/besu/static-nodes.json"
+
+profile = "ENTERPRISE"
+min-gas-price = 0
+
+# P2P network
+p2p-enabled=true
+p2p-port=30303
+host-allowlist=["*"]
+discovery-enabled=false
+
+# JSON-RPC
+rpc-http-enabled=true
+rpc-http-port=8545
+rpc-http-api=["ETH","NET","QBFT"]
+rpc-http-cors-origins=["all"]
+
+# Metrics
+metrics-enabled=true
+metrics-host="0.0.0.0"
+metrics-port=9545
