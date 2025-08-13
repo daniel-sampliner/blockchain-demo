@@ -8,6 +8,8 @@ metadata:
   name: node
 spec:
   type: ClusterIP
+  clusterIP: None
+  ipFamilyPolicy: SingleStack
   ports:
     - port: 30303
       targetPort: 30303
@@ -29,3 +31,22 @@ spec:
       targetPort: 8547
       protocol: TCP
       name: graphql
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: bootstrap
+spec:
+  type: ClusterIP
+  clusterIP: None
+  ipFamilyPolicy: SingleStack
+  publishNotReadyAddresses: true
+  ports:
+    - port: 30303
+      targetPort: 30303
+      protocol: UDP
+      name: discovery
+    - port: 30303
+      targetPort: 30303
+      protocol: TCP
+      name: rlpx

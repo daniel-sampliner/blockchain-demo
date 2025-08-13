@@ -5,7 +5,7 @@
 namespace: besu-qbft
 
 labels:
-  - includeTemplates: true
+  - includeSelectors: true
     pairs:
       app: besu
 
