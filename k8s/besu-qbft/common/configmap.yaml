@@ -23,6 +23,7 @@ data:
     static-nodes-file = "/etc/besu/static-nodes.json"
 
     profile = "ENTERPRISE"
+    min-gas-price = 0
 
     # P2P network
     p2p-enabled=true
