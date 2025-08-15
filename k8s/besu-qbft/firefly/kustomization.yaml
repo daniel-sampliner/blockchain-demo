@@ -21,11 +21,11 @@ configMapGenerator:
 secretGenerator:
   - name: signer
     files:
-      - ./0de88fee299cb5ef08670342b7208ce80ad61cf9.key.json
-      - ./0de88fee299cb5ef08670342b7208ce80ad61cf9.password
-      - ./3d55068ef46bd7e7006878375d6ea23c93da458b.key.json
-      - ./3d55068ef46bd7e7006878375d6ea23c93da458b.password
-      - ./5eab7051cd4da30f366e926a961d6ae966f7f739.key.json
-      - ./5eab7051cd4da30f366e926a961d6ae966f7f739.password
-      - ./e988d28341395bab80ba6fa6d529267241f793d2.key.json
-      - ./e988d28341395bab80ba6fa6d529267241f793d2.password
+      - ./keys/0de88fee299cb5ef08670342b7208ce80ad61cf9.key.json
+      - ./keys/0de88fee299cb5ef08670342b7208ce80ad61cf9.password
+      - ./keys/3d55068ef46bd7e7006878375d6ea23c93da458b.key.json
+      - ./keys/3d55068ef46bd7e7006878375d6ea23c93da458b.password
+      - ./keys/5eab7051cd4da30f366e926a961d6ae966f7f739.key.json
+      - ./keys/5eab7051cd4da30f366e926a961d6ae966f7f739.password
+      - ./keys/e988d28341395bab80ba6fa6d529267241f793d2.key.json
+      - ./keys/e988d28341395bab80ba6fa6d529267241f793d2.password
