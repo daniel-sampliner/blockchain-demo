@@ -16,6 +16,7 @@ in
         go-ethereum
         kind
         kubebuilder
+        redo-apenwarr
         reuse
         ;
     };

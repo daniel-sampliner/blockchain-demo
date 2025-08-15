@@ -1,11 +1,10 @@
+#!/usr/bin/env bash
+
 # SPDX-FileCopyrightText: 2025 Daniel Sampliner <samplinerD@gmail.com>
 #
 # SPDX-License-Identifier: GLWTPL
 
-kind-data/*
-!kind-data/.gitkeep
-
-kubeconfig
-
-.redo
-load-racecourse
+redo \
+	apply-k8s \
+	load-images \
+	;
