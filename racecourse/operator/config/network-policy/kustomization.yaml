@@ -1,0 +1,6 @@
+# SPDX-FileCopyrightText: 2025 Daniel Sampliner <samplinerD@gmail.com>
+#
+# SPDX-License-Identifier: GLWTPL
+
+resources:
+- allow-metrics-traffic.yaml

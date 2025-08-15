@@ -11,7 +11,10 @@ in
       inherit (pkgs)
         besu
         bun
+        gnumake
+        go
         kind
+        kubebuilder
         reuse
         ;
     };

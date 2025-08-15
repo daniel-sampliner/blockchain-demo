@@ -1,0 +1,8 @@
+# SPDX-FileCopyrightText: 2025 Daniel Sampliner <samplinerD@gmail.com>
+#
+# SPDX-License-Identifier: GLWTPL
+
+## Append samples of your project ##
+resources:
+- webapp_v1alpha1_racecourse.yaml
+# +kubebuilder:scaffold:manifestskustomizesamples
