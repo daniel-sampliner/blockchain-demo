@@ -1,0 +1,9 @@
+# SPDX-FileCopyrightText: 2025 Daniel Sampliner <samplinerD@gmail.com>
+#
+# SPDX-License-Identifier: GLWTPL
+
+*
+!client
+!contracts
+!server
+**/node_modules
