@@ -13,6 +13,7 @@ in
         bun
         gnumake
         go
+        go-ethereum
         kind
         kubebuilder
         reuse
