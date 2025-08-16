@@ -10,8 +10,9 @@ labels:
       app: signer
 
 resources:
+  - ./deployment.yaml
+  - ./ingress.yaml
   - ./service.yaml
-  - ./statefulset.yaml
 
 configMapGenerator:
   - name: signer

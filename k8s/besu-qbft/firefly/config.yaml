@@ -11,3 +11,5 @@ fileWallet:
 server:
   address: '0.0.0.0'
   port: 8545
+backend:
+  url: http://loadbalancer:8545

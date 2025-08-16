@@ -1,0 +1,17 @@
+# SPDX-FileCopyrightText: 2025 Daniel Sampliner <samplinerD@gmail.com>
+#
+# SPDX-License-Identifier: GLWTPL
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: nodes
+
+spec:
+  type: ClusterIP
+  clusterIP: None
+  ports:
+    - port: 8545
+      targetPort: json-rpc
+      protocol: TCP
+      name: json-rpc

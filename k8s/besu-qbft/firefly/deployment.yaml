@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: GLWTPL
 
 apiVersion: apps/v1
-kind: StatefulSet
+kind: Deployment
 metadata:
   name: signer
 spec:
@@ -15,22 +15,9 @@ spec:
           image: ghcr.io/hyperledger/firefly-signer:v1.1.22
           imagePullPolicy: IfNotPresent
           command:
-            - bash
-            - -xeuc
-            - |
-                POD_NUM=${POD_NAME##*-}
-                cat /config/config.yaml - <<-EOF | tee /tmp/config.yaml
-                backend:
-                  url: http://node-${POD_NUM:?}.besu-qbft.svc.cluster.local:8545
-                EOF
-
-                exec ffsigner --config /tmp/config.yaml
-
-          env:
-            - name: POD_NAME
-              valueFrom:
-                fieldRef:
-                  fieldPath: metadata.name
+            - /usr/bin/ffsigner
+            - --config
+            - /opt/config.yaml
           ports:
             - containerPort: 8545
               name: json-rpc
@@ -44,13 +31,11 @@ spec:
               memory: 2048Mi
           volumeMounts:
             - name: config
-              mountPath: /config
+              mountPath: /opt
               readOnly: true
             - name: keystore
               mountPath: /data/keystore
               readOnly: true
-            - name: tmp
-              mountPath: /tmp
 
       volumes:
         - name: config
@@ -61,6 +46,3 @@ spec:
             sources:
               - secret:
                   name: signer
-        - name: tmp
-          emptyDir:
-            sizeLimit: 1Mi

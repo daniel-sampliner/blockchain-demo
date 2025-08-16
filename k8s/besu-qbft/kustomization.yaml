@@ -7,4 +7,5 @@ namespace: besu-qbft
 resources:
   - ./besu
   - ./firefly
+  - ./loadbalancer
   - ./namespace.yaml

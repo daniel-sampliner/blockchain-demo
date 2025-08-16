@@ -1,0 +1,30 @@
+# SPDX-FileCopyrightText: 2025 Daniel Sampliner <samplinerD@gmail.com>
+#
+# SPDX-License-Identifier: GLWTPL
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: loadbalancer
+spec:
+  template:
+    spec:
+      containers:
+        - image: localhost/loadbalancer:latest
+          imagePullPolicy: Never
+          name: loadbalancer
+          args:
+            - -config
+            - /opt/config.yaml
+          volumeMounts:
+            - mountPath: /opt
+              name: loadbalancer-config
+          ports:
+            - containerPort: 8545
+              name: json-rpc
+              protocol: TCP
+
+      volumes:
+        - name: loadbalancer-config
+          configMap:
+            name: loadbalancer-config

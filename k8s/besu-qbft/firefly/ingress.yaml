@@ -1,0 +1,21 @@
+# SPDX-FileCopyrightText: 2025 Daniel Sampliner <samplinerD@gmail.com>
+#
+# SPDX-License-Identifier: GLWTPL
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: signer
+
+spec:
+  rules:
+    - host: blockchain.liger-beaver.ts.net
+      http:
+        paths:
+          - backend:
+              service:
+                name: signer
+                port:
+                  name: json-rpc
+            path: /
+            pathType: Prefix

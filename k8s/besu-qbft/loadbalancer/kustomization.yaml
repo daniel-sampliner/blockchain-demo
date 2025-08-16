@@ -4,11 +4,16 @@
 
 namespace: besu-qbft
 
+resources:
+  - ./deployment.yaml
+  - ./service.yaml
+
 labels:
   - includeSelectors: true
     pairs:
-      app: besu
+      app: loadbalancer
 
-resources:
-  - ./overlays
-  - ./service.yaml
+configMapGenerator:
+  - name: loadbalancer-config
+    files:
+      - ./config.yaml
