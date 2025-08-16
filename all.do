@@ -4,10 +4,17 @@
 #
 # SPDX-License-Identifier: GLWTPL
 
-redo \
-	apply-k8s \
-	apply-k8s-sops \
-	load-images \
-	blockchain.liger-beaver.ts.net.tscert \
-	racecourse.liger-beaver.ts.net.tscert \
-	;
+deps=(
+	apply-k8s
+	load-images
+)
+
+if [[ -v WITH_TS ]]; then
+	deps+=(
+		apply-k8s-sops
+		blockchain.liger-beaver.ts.net.tscert
+		racecourse.liger-beaver.ts.net.tscert
+	)
+fi
+
+redo "${deps[@]}"

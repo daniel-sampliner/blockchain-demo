@@ -6,9 +6,15 @@
 
 set -e
 
-redo \
-	loadbalancer.load \
-	nuke-old-ts.load \
-	racecourse-operator.load \
-	racecourse.load \
-	;
+deps=(
+	loadbalancer.load
+	racecourse-operator.load
+	racecourse.load
+)
+
+if [[ -v WITH_TS ]]; then
+	deps+=(
+		nuke-old-ts.load
+	)
+fi
+redo "${deps[@]}"

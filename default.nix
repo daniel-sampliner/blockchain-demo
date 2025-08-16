@@ -25,6 +25,7 @@ in
           kubebuilder
           redo-apenwarr
           reuse
+          sops
           ;
 
         inherit ksops;
