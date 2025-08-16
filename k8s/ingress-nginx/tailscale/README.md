@@ -1,3 +1,9 @@
+<!--
+Copyright (C) Tailscale Inc & AUTHORS
+
+SPDX-License-Identifier: BSD-3-Clause
+-->
+
 # Overview
 
 There are quite a few ways of running Tailscale inside a Kubernetes Cluster.

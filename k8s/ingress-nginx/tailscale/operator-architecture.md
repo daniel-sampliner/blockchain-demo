@@ -1,3 +1,9 @@
+<!--
+Copyright (C) Tailscale Inc & AUTHORS
+
+SPDX-License-Identifier: BSD-3-Clause
+-->
+
 # Operator architecture diagrams
 
 The Tailscale [Kubernetes operator][kb-operator] has a collection of use-cases
