@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: Antonio Ojea <aojea@google.com>
+# SPDX-FileCopyrightText: vonhatnam1212 <48680003+vonhatnam1212@users.noreply.github.com>
+#
+# SPDX-License-Identifier: Apache-2.0
+
 apiVersion: v1
 kind: Namespace
 metadata:
