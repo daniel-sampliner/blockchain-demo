@@ -40,6 +40,10 @@ spec:
             - /bin/tsnsrv
             - -name
             - REPLACEME
+            - -plaintext
+            - -listenAddr
+            - :80
+            # - -tsnetVerbose
             - http://ingress-nginx-controller.ingress-nginx:80
           env:
             - name: TS_AUTHKEY
@@ -49,8 +53,8 @@ spec:
                   name: tailscale-auth
             - name: TS_STATE_DIR
               value: /opt/ts
-            - name: TS_DEBUG_ACME_DIRECTORY_URL
-              value: https://acme-staging-v02.api.letsencrypt.org/directory
+            # - name: TS_DEBUG_ACME_DIRECTORY_URL
+            #   value: https://acme-staging-v02.api.letsencrypt.org/directory
           volumeMounts:
             - mountPath: /opt/ts
               name: ts-state

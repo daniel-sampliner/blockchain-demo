@@ -24,7 +24,6 @@ ret=$(curl \
 	--max-time 30 \
 	--retry 10 \
 	--retry-max-time 300 \
-	-k \
-	"https://$2")
+	"http://$2")
 
 [[ $ret == 405 ]]
