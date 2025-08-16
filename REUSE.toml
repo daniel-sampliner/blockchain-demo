@@ -1,0 +1,11 @@
+version = 1
+
+[[annotations]]
+path = ["racecourse/**/*"]
+SPDX-FileCopyrightText = "2018 Gabriel Indik <gabriel.indik@consensys.net>"
+SPDX-License-Identifier = "ISC"
+
+[[annotations]]
+path = ["LoadBalancer/**/*"]
+SPDX-FileCopyrightText = "Roman Nesytov <r.nesytov@ongrid.pro>"
+SPDX-License-Identifier = "MIT"

@@ -26,7 +26,7 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/controller/controllerutil"
 	logf "sigs.k8s.io/controller-runtime/pkg/log"
 
-	webappv1alpha1 "github.com/daniel-sampliner/blockchain-demo/racecourse/operator/api/v1alpha1"
+	webappv1alpha1 "github.com/daniel-sampliner/blockchain-demo/racecourse-operator/api/v1alpha1"
 )
 
 const (

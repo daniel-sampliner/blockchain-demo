@@ -15,7 +15,7 @@ import (
 
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
-	webappv1alpha1 "github.com/daniel-sampliner/blockchain-demo/racecourse/operator/api/v1alpha1"
+	webappv1alpha1 "github.com/daniel-sampliner/blockchain-demo/racecourse-operator/api/v1alpha1"
 )
 
 var _ = Describe("Racecourse Controller", func() {

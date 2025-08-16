@@ -7,6 +7,7 @@
 set -e
 
 redo \
+	loadbalancer.load \
 	racecourse.load \
 	racecourse-operator.load \
 	;

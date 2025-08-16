@@ -2,7 +2,7 @@
 //
 // SPDX-License-Identifier: GLWTPL
 
-module github.com/daniel-sampliner/blockchain-demo/racecourse/operator
+module github.com/daniel-sampliner/blockchain-demo/racecourse-operator
 
 go 1.23.0
 

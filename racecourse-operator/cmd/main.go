@@ -25,8 +25,8 @@ import (
 	metricsserver "sigs.k8s.io/controller-runtime/pkg/metrics/server"
 	"sigs.k8s.io/controller-runtime/pkg/webhook"
 
-	webappv1alpha1 "github.com/daniel-sampliner/blockchain-demo/racecourse/operator/api/v1alpha1"
-	"github.com/daniel-sampliner/blockchain-demo/racecourse/operator/internal/controller"
+	webappv1alpha1 "github.com/daniel-sampliner/blockchain-demo/racecourse-operator/api/v1alpha1"
+	"github.com/daniel-sampliner/blockchain-demo/racecourse-operator/internal/controller"
 	// +kubebuilder:scaffold:imports
 )
 

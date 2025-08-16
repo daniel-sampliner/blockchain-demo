@@ -6,7 +6,7 @@ domain: my.domain
 layout:
 - go.kubebuilder.io/v4
 projectName: operator
-repo: github.com/daniel-sampliner/blockchain-demo/racecourse/operator
+repo: github.com/daniel-sampliner/blockchain-demo/racecourse-operator
 resources:
 - api:
     crdVersion: v1
@@ -15,6 +15,6 @@ resources:
   domain: my.domain
   group: webapp
   kind: Racecourse
-  path: github.com/daniel-sampliner/blockchain-demo/racecourse/operator/api/v1alpha1
+  path: github.com/daniel-sampliner/blockchain-demo/racecourse-operator/api/v1alpha1
   version: v1alpha1
 version: "3"

@@ -1,6 +1,0 @@
-version = 1
-
-[[annotations]]
-path = ["**/*"]
-SPDX-FileCopyrightText = "2018 Gabriel Indik <gabriel.indik@consensys.net>"
-SPDX-License-Identifier = "ISC"

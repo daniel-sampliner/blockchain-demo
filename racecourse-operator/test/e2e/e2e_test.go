@@ -15,7 +15,7 @@ import (
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 
-	"github.com/daniel-sampliner/blockchain-demo/racecourse/operator/test/utils"
+	"github.com/daniel-sampliner/blockchain-demo/racecourse-operator/test/utils"
 )
 
 // namespace where the project is deployed in

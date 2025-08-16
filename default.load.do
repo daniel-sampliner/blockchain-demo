@@ -11,7 +11,7 @@ IMAGE="localhost/${2:?}:latest"
 
 declare -A image_dir=(
 	[racecourse]=racecourse
-	[racecourse-operator]=racecourse/operator
+	[racecourse-operator]=racecourse-operator
 	[loadbalancer]=LoadBalancer
 )
 

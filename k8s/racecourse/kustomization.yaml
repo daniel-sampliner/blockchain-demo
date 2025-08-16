@@ -6,7 +6,7 @@ namespace: racecourse
 
 resources:
   - ./racecourse.yaml
-  - ../../racecourse/operator/config/default
+  - ../../racecourse-operator/config/default
 
 
 images:
