@@ -1,0 +1,30 @@
+# SPDX-FileCopyrightText: 2025 Daniel Sampliner <samplinerD@gmail.com>
+#
+# SPDX-License-Identifier: GLWTPL
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tsnsrv
+spec:
+  template:
+    spec:
+      containers:
+        - image: ghcr.io/boinkor-net/tsnsrv:latest
+          imagePullPolicy: Always
+          name: tsnsrv
+          command:
+            - /bin/tsnsrv
+            - -name
+            - REPLACEME
+            - http://ingress-nginx-controller:80
+          env:
+            - name: TS_AUTHKEY
+              valueFrom:
+                secretKeyRef:
+                  key: TS_AUTHKEY
+                  name: tailscale-auth
+                  optional: true
+          ports:
+            - containerPort: 443
+              name: https

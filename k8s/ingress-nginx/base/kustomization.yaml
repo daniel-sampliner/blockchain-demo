@@ -1,0 +1,14 @@
+# SPDX-FileCopyrightText: 2025 Daniel Sampliner <samplinerD@gmail.com>
+#
+# SPDX-License-Identifier: GLWTPL
+
+labels:
+  - pairs:
+      app: tsnsrv
+    includeSelectors: true
+
+resources:
+  - ./deployment.yaml
+
+generators:
+  - ./secret-generator.yaml

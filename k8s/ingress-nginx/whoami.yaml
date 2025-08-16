@@ -46,7 +46,8 @@ metadata:
     app: whoami
 spec:
   rules:
-    - http:
+    - host: blockchain.liger-beaver.ts.net
+      http:
         paths:
           - pathType: Prefix
             path: /whoami

@@ -1,0 +1,13 @@
+# SPDX-FileCopyrightText: 2025 Daniel Sampliner <samplinerD@gmail.com>
+#
+# SPDX-License-Identifier: GLWTPL
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: tsnsrv
+spec:
+  ports:
+    - port: 443
+      name: https
+      targetPort: https

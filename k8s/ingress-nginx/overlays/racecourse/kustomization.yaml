@@ -1,0 +1,29 @@
+# SPDX-FileCopyrightText: 2025 Daniel Sampliner <samplinerD@gmail.com>
+#
+# SPDX-License-Identifier: GLWTPL
+
+namespace: ingress-nginx
+nameSuffix: -racecourse
+
+resources:
+  - ../../base
+
+labels:
+  - pairs:
+      instance: tsnsrv-racecourse
+    includeSelectors: true
+
+replacements:
+  - source:
+      kind: Deployment
+      name: tsnsrv
+      fieldPath: metadata.name
+      options:
+        delimiter: "-"
+        index: 1
+    targets:
+      - select:
+          kind: Deployment
+          name: tsnsrv
+        fieldPaths:
+          - spec.template.spec.containers.[name=tsnsrv].command.2
