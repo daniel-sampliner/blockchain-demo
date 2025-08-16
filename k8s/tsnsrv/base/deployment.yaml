@@ -9,6 +9,29 @@ metadata:
 spec:
   template:
     spec:
+      initContainers:
+        - image: docker.io/library/alpine:latest
+          imagePullPolicy: Always
+          name: nuke-old-ts
+          command:
+            - sh
+            - -exc
+            - |
+              apk add bash curl jq
+              /opt/nuke-old-ts
+          env:
+            - name: TS_APIKEY
+              valueFrom:
+                secretKeyRef:
+                  key: TS_APIKEY
+                  name: tailscale-auth
+            - name: TS_NAME
+              value: REPLACEME
+          volumeMounts:
+            - mountPath: /opt
+              name: nuke-old-ts
+              readOnly: true
+
       containers:
         - image: ghcr.io/boinkor-net/tsnsrv:latest
           imagePullPolicy: Always
@@ -17,7 +40,6 @@ spec:
             - /bin/tsnsrv
             - -name
             - REPLACEME
-            - -ephemeral
             - http://ingress-nginx-controller.ingress-nginx:80
           env:
             - name: TS_AUTHKEY
@@ -25,7 +47,32 @@ spec:
                 secretKeyRef:
                   key: TS_AUTHKEY
                   name: tailscale-auth
-                  optional: true
+            - name: TS_STATE_DIR
+              value: /opt/ts
+            - name: TS_DEBUG_ACME_DIRECTORY_URL
+              value: https://acme-staging-v02.api.letsencrypt.org/directory
+          volumeMounts:
+            - mountPath: /opt/ts
+              name: ts-state
           ports:
             - containerPort: 443
               name: https
+              
+      volumes:
+        - name: nuke-old-ts
+          configMap:
+            name: nuke-old-ts
+            defaultMode: 0755
+
+        - name: ts-state
+          ephemeral:
+            volumeClaimTemplate:
+              metadata:
+                labels: {}
+              spec:
+                storageClassName: standard
+                accessModes:
+                  - ReadWriteOnce
+                resources:
+                  requests:
+                    storage: 512Mi

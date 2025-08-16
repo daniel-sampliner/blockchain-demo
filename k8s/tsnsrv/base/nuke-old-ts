@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+# SPDX-FileCopyrightText: 2025 Daniel Sampliner <samplinerD@gmail.com>
+#
+# SPDX-License-Identifier: GLWTPL
+
+set -ex
+
+auth_header() {
+	cat - <<<"Authorization: Bearer ${TS_APIKEY:?}"
+}
+
+tsapi() {
+	req=${1:?}
+	shift
+	curl \
+		--silent \
+		--show-error \
+		--fail \
+		--header @<(auth_header) \
+		--request "$req" \
+		"${@/#/https:\/\/api.tailscale.com\/api\/v2}"
+}
+
+readarray -t nodes < <(
+	tsapi GET '/tailnet/-/devices' \
+		| jq --arg "TS_NAME" "${TS_NAME:?}" -r '.devices[] | select(.hostname | test($TS_NAME)).nodeId'
+)
+
+if [[ ${#nodes[@]} -lt 1 ]]; then
+	exit 0
+fi
+
+tsapi DELETE "${nodes[@]/#/\/device\/}" >/dev/null

@@ -27,3 +27,15 @@ replacements:
           name: tsnsrv
         fieldPaths:
           - spec.template.spec.containers.[name=tsnsrv].command.2
+          - spec.template.spec.initContainers.[name=nuke-old-ts].env.[name=TS_NAME].value
+
+  - source:
+      kind: Deployment
+      name: tsnsrv
+      fieldPath: metadata.labels
+    targets:
+      - select:
+          kind: Deployment
+          name: tsnsrv
+        fieldPaths:
+          - spec.template.spec.volumes.[name=ts-state].ephemeral.volumeClaimTemplate.metadata.labels

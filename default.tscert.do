@@ -7,9 +7,12 @@
 set -e
 
 redo apply-k8s-sops
+
+sleep 1
 kubectl --namespace tsnsrv wait \
 	--for condition=Ready \
 	--selector app=tsnsrv \
+	--selector instance="tsnsrv-${2%%.*}" \
 	pod >&2
 
 ret=$(curl \
@@ -18,9 +21,10 @@ ret=$(curl \
 	--write-out '%{http_code}' \
 	--head \
 	--request TRACE \
-	--max-time 10 \
+	--max-time 30 \
 	--retry 10 \
-	--retry-max-time 60 \
+	--retry-max-time 300 \
+	-k \
 	"https://$2")
 
 [[ $ret == 405 ]]

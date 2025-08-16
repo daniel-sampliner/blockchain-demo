@@ -10,5 +10,10 @@ labels:
 resources:
   - ./deployment.yaml
 
+configMapGenerator:
+  - name: nuke-old-ts
+    files:
+      - ./nuke-old-ts
+
 generators:
   - ./secret-generator.yaml
