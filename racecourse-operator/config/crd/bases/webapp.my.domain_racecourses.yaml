@@ -18,9 +18,9 @@ spec:
     - jsonPath: .spec.replicas
       name: Replicas
       type: integer
-    - jsonPath: .spec.ingressPath
+    - jsonPath: .spec.ingressHost
       name: IngressHost
-      type: integer
+      type: string
     name: v1alpha1
     schema:
       openAPIV3Schema:

@@ -37,7 +37,7 @@ type RacecourseStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:subresource:scale:specpath=.spec.replicas,statuspath=.status.replicas,selectorpath=.status.selector
 // +kubebuilder:printcolumn:name="Replicas",type=integer,JSONPath=`.spec.replicas`
-// +kubebuilder:printcolumn:name="IngressHost",type=integer,JSONPath=`.spec.ingressPath`
+// +kubebuilder:printcolumn:name="IngressHost",type=string,JSONPath=`.spec.ingressHost`
 
 // Racecourse is the Schema for the racecourses API.
 type Racecourse struct {
