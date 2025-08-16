@@ -44,13 +44,17 @@ rules:
   - update
   - watch
 - apiGroups:
-  - race.wv
+  - networking.k8s.io
   resources:
-  - racecourses/scale
+  - ingresses
   verbs:
+  - create
+  - delete
   - get
+  - list
   - patch
   - update
+  - watch
 - apiGroups:
   - webapp.my.domain
   resources:
@@ -72,6 +76,7 @@ rules:
 - apiGroups:
   - webapp.my.domain
   resources:
+  - racecourses/scale
   - racecourses/status
   verbs:
   - get

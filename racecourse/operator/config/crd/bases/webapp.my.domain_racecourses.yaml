@@ -18,6 +18,9 @@ spec:
     - jsonPath: .spec.replicas
       name: Replicas
       type: integer
+    - jsonPath: .spec.ingressPath
+      name: IngressHost
+      type: integer
     name: v1alpha1
     schema:
       openAPIV3Schema:
@@ -43,6 +46,9 @@ spec:
           spec:
             description: RacecourseSpec defines the desired state of Racecourse.
             properties:
+              ingressHost:
+                description: IngressHost is the host to use in the Ingress resource
+                type: string
               replicas:
                 description: Replicas is the number of replicas in the deployment
                 format: int32
