@@ -4,4 +4,4 @@
 
 resources:
   - ./besu-qbft
-  - ../racecourse/operator/config/crd
+  - ./racecourse

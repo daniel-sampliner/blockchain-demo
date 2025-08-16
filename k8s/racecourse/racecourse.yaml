@@ -10,4 +10,4 @@ metadata:
   name: racecourse
 spec:
   replicas: 1
-  ingressPath: "/"
+  ingressHost: racecourse.liger-beaver.ts.net

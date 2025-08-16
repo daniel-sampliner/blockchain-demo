@@ -8,4 +8,6 @@ redo \
 	apply-k8s \
 	apply-k8s-ingress \
 	load-images \
+	blockchain.liger-beaver.ts.net.tscert \
+	racecourse.liger-beaver.ts.net.tscert \
 	;

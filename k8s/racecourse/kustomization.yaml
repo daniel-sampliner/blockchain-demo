@@ -5,5 +5,17 @@
 namespace: racecourse
 
 resources:
-  - ./namespace.yaml
   - ./racecourse.yaml
+  - ../../racecourse/operator/config/default
+
+
+images:
+  - name: controller
+    newName: localhost/racecourse-operator
+    newTag: latest
+
+patches:
+  - path: ./deployment.patch.yaml
+    target:
+      kind: Deployment
+      name: operator-controller-manager

@@ -9,3 +9,4 @@ kubeconfig
 
 .redo
 load-racecourse
+load-racecourse-operator

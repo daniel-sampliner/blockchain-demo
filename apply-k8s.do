@@ -6,5 +6,7 @@
 
 set -e
 
+make -C racecourse/operator generate manifests >&2
+
 cd k8s
 kubectl apply -k . >&2
