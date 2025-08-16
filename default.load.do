@@ -10,9 +10,10 @@ CONTAINER_TOOL="${CONTAINER_TOOL:-docker}"
 IMAGE="localhost/${2:?}:latest"
 
 declare -A image_dir=(
-	[racecourse]=racecourse
-	[racecourse-operator]=racecourse-operator
 	[loadbalancer]=LoadBalancer
+	[racecourse-operator]=racecourse-operator
+	[racecourse]=racecourse
+	[nuke-old-ts]=nuke-old-ts
 )
 
 "$CONTAINER_TOOL" build -t "$IMAGE" "${image_dir[$2]}" >&2

@@ -8,6 +8,7 @@ set -e
 
 redo \
 	loadbalancer.load \
-	racecourse.load \
+	nuke-old-ts.load \
 	racecourse-operator.load \
+	racecourse.load \
 	;

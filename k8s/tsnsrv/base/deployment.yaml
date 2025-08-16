@@ -10,15 +10,9 @@ spec:
   template:
     spec:
       initContainers:
-        - image: docker.io/library/alpine:latest
-          imagePullPolicy: Always
+        - image: localhost/nuke-old-ts:latest
+          imagePullPolicy: Never
           name: nuke-old-ts
-          command:
-            - sh
-            - -exc
-            - |
-              apk add bash curl jq
-              /opt/nuke-old-ts
           env:
             - name: TS_APIKEY
               valueFrom:
@@ -27,10 +21,6 @@ spec:
                   name: tailscale-auth
             - name: TS_NAME
               value: REPLACEME
-          volumeMounts:
-            - mountPath: /opt
-              name: nuke-old-ts
-              readOnly: true
 
       containers:
         - image: ghcr.io/boinkor-net/tsnsrv:latest
@@ -63,11 +53,6 @@ spec:
               name: https
               
       volumes:
-        - name: nuke-old-ts
-          configMap:
-            name: nuke-old-ts
-            defaultMode: 0755
-
         - name: ts-state
           ephemeral:
             volumeClaimTemplate:
