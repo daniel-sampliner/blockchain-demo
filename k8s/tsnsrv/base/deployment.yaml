@@ -17,7 +17,8 @@ spec:
             - /bin/tsnsrv
             - -name
             - REPLACEME
-            - http://ingress-nginx-controller:80
+            - -ephemeral
+            - http://ingress-nginx-controller.ingress-nginx:80
           env:
             - name: TS_AUTHKEY
               valueFrom:

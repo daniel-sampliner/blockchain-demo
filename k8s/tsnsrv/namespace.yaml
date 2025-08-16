@@ -2,8 +2,7 @@
 #
 # SPDX-License-Identifier: GLWTPL
 
-namespace: ingress-nginx
-
-resources:
-  - ./blockchain
-  - ./racecourse
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: tsnsrv

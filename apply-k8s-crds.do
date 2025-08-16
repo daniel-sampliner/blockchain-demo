@@ -5,6 +5,6 @@
 # SPDX-License-Identifier: GLWTPL
 
 set -e
-cd k8s/ingress-nginx/
-kustomize build --enable-alpha-plugins --enable-exec . \
-	| kubectl apply -f - >&2
+
+make -C racecourse/operator generate manifests >&2
+kubectl apply -k racecourse/operator/config/default >&2

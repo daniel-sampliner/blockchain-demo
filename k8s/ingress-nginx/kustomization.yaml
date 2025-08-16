@@ -6,5 +6,4 @@ namespace: ingress-nginx
 
 resources:
   - ./kind/deploy-ingress-nginx.yaml
-  - ./overlays
   # - ./whoami.yaml

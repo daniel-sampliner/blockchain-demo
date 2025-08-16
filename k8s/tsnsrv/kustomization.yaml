@@ -2,7 +2,8 @@
 #
 # SPDX-License-Identifier: GLWTPL
 
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: racecourse
+namespace: tsnsrv
+
+resources:
+  - ./namespace.yaml
+  - ./overlays

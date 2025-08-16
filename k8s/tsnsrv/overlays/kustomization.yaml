@@ -2,7 +2,8 @@
 #
 # SPDX-License-Identifier: GLWTPL
 
+namespace: tsnsrv
+
 resources:
-  - ./besu-qbft
-  - ./ingress-nginx/
+  - ./blockchain
   - ./racecourse

@@ -2,7 +2,7 @@
 #
 # SPDX-License-Identifier: GLWTPL
 
-namespace: ingress-nginx
+namespace: tsnsrv
 nameSuffix: -racecourse
 
 resources:
