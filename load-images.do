@@ -6,4 +6,7 @@
 
 set -e
 
-redo load-racecourse load-racecourse-operator
+redo \
+	racecourse.load \
+	racecourse-operator.load \
+	;

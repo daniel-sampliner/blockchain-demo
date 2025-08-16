@@ -7,6 +7,5 @@ kind-data/*
 
 kubeconfig
 
+*.load
 .redo
-load-racecourse
-load-racecourse-operator

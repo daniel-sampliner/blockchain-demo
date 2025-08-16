@@ -7,9 +7,15 @@
 set -e
 
 CONTAINER_TOOL="${CONTAINER_TOOL:-docker}"
-IMAGE="${IMAGE:-localhost/racecourse-operator:latest}"
+IMAGE="localhost/${2:?}:latest"
 
-"$CONTAINER_TOOL" build -t "$IMAGE" racecourse/operator >&2
+declare -A image_dir=(
+	[racecourse]=racecourse
+	[racecourse-operator]=racecourse/operator
+	[loadbalancer]=LoadBalancer
+)
+
+"$CONTAINER_TOOL" build -t "$IMAGE" "${image_dir[$2]}" >&2
 kind load docker-image "$IMAGE"
 
 "$CONTAINER_TOOL" image inspect "$IMAGE" -f '{{.Id}}'
