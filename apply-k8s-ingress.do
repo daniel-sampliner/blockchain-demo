@@ -4,8 +4,7 @@
 #
 # SPDX-License-Identifier: GLWTPL
 
-redo \
-	apply-k8s \
-	apply-k8s-ingress \
-	load-images \
-	;
+set -e
+cd k8s/ingress-nginx/
+kustomize build --enable-alpha-plugins --enable-exec . \
+	| kubectl apply -f - >&2

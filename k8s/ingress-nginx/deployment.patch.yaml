@@ -1,0 +1,53 @@
+# SPDX-FileCopyrightText: 2025 Daniel Sampliner <samplinerD@gmail.com>
+#
+# SPDX-License-Identifier: GLWTPL
+
+- op: test
+  path: /spec/template/spec/containers/0/name
+  value: controller
+
+- op: add
+  path: /spec/template/spec/containers/-
+  value:
+    env:
+      - name: TS_KUBE_SECRET
+        value: tailscale-auth
+      - name: TS_USERSPACE
+        value: "true"
+      - name: TS_DEBUG_FIREWALL_MODE
+        value: auto
+      - name: TS_AUTHKEY
+        valueFrom:
+          secretKeyRef:
+            key: TS_AUTHKEY
+            name: tailscale-auth
+            optional: true
+      - name: POD_NAME
+        valueFrom:
+          fieldRef:
+            fieldPath: metadata.name
+      - name: POD_UID
+        valueFrom:
+          fieldRef:
+            fieldPath: metadata.uid
+      - name: TS_HOSTNAME
+        value: blockchain-demo
+      - name: TS_SERVE_CONFIG
+        value: /opt/ts/tailscale_serve.json
+    image: ghcr.io/tailscale/tailscale:latest
+    imagePullPolicy: Always
+    name: tailscale
+    securityContext:
+      runAsUser: 1000
+      runAsGroup: 1000
+    volumeMounts:
+      - name: tailscale-serve-config
+        mountPath: /opt/ts
+        readOnly: true
+
+- op: add
+  path: /spec/template/spec/volumes/-
+  value:
+    name: tailscale-serve-config
+    configMap:
+      name: tailscale-serve-config

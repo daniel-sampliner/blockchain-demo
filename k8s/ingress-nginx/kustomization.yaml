@@ -1,0 +1,24 @@
+# SPDX-FileCopyrightText: 2025 Daniel Sampliner <samplinerD@gmail.com>
+#
+# SPDX-License-Identifier: GLWTPL
+
+namespace: ingress-nginx
+
+resources:
+  - ./kind/deploy-ingress-nginx.yaml
+  - ./rbac.yaml
+  - ./whoami.yaml
+
+generators:
+  - ./secret-generator.yaml
+
+patches:
+  - path: ./deployment.patch.yaml
+    target:
+      kind: Deployment
+      name: ingress-nginx-controller
+
+configMapGenerator:
+  - name: tailscale-serve-config
+    files:
+      - ./tailscale_serve.json

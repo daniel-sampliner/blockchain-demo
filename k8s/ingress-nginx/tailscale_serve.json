@@ -1,0 +1,26 @@
+{
+  "TCP": {
+    "443": {
+      "HTTPS": true
+    },
+    "80": {
+      "HTTP": true
+    }
+  },
+  "Web": {
+    "blockchain-demo.liger-beaver.ts.net:443": {
+      "Handlers": {
+        "/": {
+          "Proxy": "http://localhost:80"
+        }
+      }
+    },
+    "blockchain-demo.liger-beaver.ts.net:80": {
+      "Handlers": {
+        "/": {
+          "Proxy": "http://localhost:80"
+        }
+      }
+    }
+  }
+}
