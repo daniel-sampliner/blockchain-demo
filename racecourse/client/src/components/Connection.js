@@ -9,7 +9,7 @@ class Connection extends Component {
         super(props);
 
         this.state = {
-            url: this.props.sessionData.url || '',
+            url: this.props.sessionData.url || 'http://blockchain.liger-beaver.ts.net',
             user: this.props.sessionData.user || '',
             password: this.props.sessionData.password || '',
             contractAddress: this.props.contractAddress || ''
