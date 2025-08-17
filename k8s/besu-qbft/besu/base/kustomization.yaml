@@ -16,7 +16,6 @@ configMapGenerator:
     files:
       - config.toml
       - genesis.json
-      - static-nodes.json
 
 replacements:
   - source:

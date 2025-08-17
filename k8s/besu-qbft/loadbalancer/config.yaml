@@ -3,11 +3,11 @@
 # SPDX-License-Identifier: GLWTPL
 
 port: 8545
-check_interval: 30
+check_interval: 10
 connection_timeout: 5
 nodes:
   - http://node-0:8545
   - http://node-1:8545
   - http://node-2:8545
   - http://node-3:8545
-block_threshold: 3
+block_threshold: 1

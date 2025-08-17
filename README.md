@@ -44,3 +44,9 @@ If not using Nix, manually install:
 1. Provide node connection URL: `http://signer.besu-qbft:8545`
 
 1. 🏇🏇🏇
+
+## Overview
+
+- [k8s](./k8s): Kubernetes manifests reponsible for the whole application stack.
+- racecourse: Racecourse application.
+- racecourse-operator: Operator responsible for deploying/managing Racecourse application.
