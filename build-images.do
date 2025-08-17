@@ -6,8 +6,6 @@
 
 set -e
 
-redo-always
-
 deps=(
 	loadbalancer.build
 	racecourse-alt.build
@@ -20,11 +18,3 @@ if [[ -v WITH_TS ]]; then
 fi
 
 redo-ifchange "${deps[@]}"
-
-for dep in "${deps[@]}"; do
-	read -r img _ <"$dep"
-	kind load docker-image "$img"
-	podman exec -it kind-control-plane \
-		crictl inspecti --output go-template --template '{{index .status.repoTags 0}} {{.status.id}}' "$img" \
-		| tee >(redo-stamp)
-done

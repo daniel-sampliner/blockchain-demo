@@ -11,4 +11,3 @@ labels:
 
 resources:
   - ./overlays
-  - ./service.yaml

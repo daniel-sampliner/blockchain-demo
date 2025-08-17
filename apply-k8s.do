@@ -6,6 +6,7 @@
 
 set -e
 
-redo apply-k8s-crds
+redo-always
+redo-ifchange apply-k8s-crds
 
 kubectl apply -k k8s >&2

@@ -4,9 +4,12 @@
 #
 # SPDX-License-Identifier: GLWTPL
 
+set -e
+
 deps=(
 	apply-k8s
 	load-images
+	wait-besu
 )
 
 if [[ -v WITH_TS ]]; then
@@ -18,4 +21,4 @@ if [[ -v WITH_TS ]]; then
 	)
 fi
 
-redo "${deps[@]}"
+redo-ifchange "${deps[@]}"

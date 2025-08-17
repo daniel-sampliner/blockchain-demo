@@ -6,5 +6,6 @@
 
 set -e
 
+redo-always
 make -C racecourse-operator generate manifests >&2
 kubectl apply -k racecourse-operator/config/crd >&2

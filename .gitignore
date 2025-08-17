@@ -7,5 +7,7 @@ kind-data/*
 
 kubeconfig
 
-*.load
+*.build
 .redo
+load-images
+wait-besu

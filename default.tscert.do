@@ -6,13 +6,14 @@
 
 set -e
 
-redo apply-k8s-sops nuke-old-ts.load
+redo-ifchange apply-k8s-sops load-images
 
 sleep 1
 kubectl --namespace tsnsrv wait \
 	--for condition=Ready \
 	--selector app=tsnsrv \
 	--selector instance="tsnsrv-${2%%.*}" \
+	--timeout=2m \
 	pod >&2
 
 ret=$(curl \

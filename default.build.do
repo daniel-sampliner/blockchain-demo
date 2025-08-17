@@ -6,6 +6,8 @@
 
 set -e
 
+redo-always
+
 tag=latest
 image="localhost/${2:?}"
 extra_args=()
@@ -26,6 +28,6 @@ declare -A image_dir=(
 )
 
 docker build -t "$image" "${extra_args[@]}" "${image_dir[$2]}" >&2
-kind load docker-image "$image"
 
-docker image inspect "$image" -f '{{.Id}}'
+docker image inspect "$image" -f '{{index .RepoTags 0}} {{.Id}}' \
+	| tee >(redo-stamp)

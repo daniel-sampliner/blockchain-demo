@@ -6,5 +6,6 @@
 
 set -e
 
+redo-always
 kustomize build --enable-alpha-plugins --enable-exec k8s/tsnsrv \
 	| kubectl apply -f - >&2
