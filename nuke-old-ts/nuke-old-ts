@@ -24,7 +24,7 @@ tsapi() {
 
 readarray -t nodes < <(
 	tsapi GET '/tailnet/-/devices' \
-		| jq --arg "TS_NAME" "${TS_NAME:?}" -r '.devices[] | select(.hostname | test($TS_NAME)).nodeId'
+		| jq --arg "TS_NAME" "${TS_NAME:?}" -r '.devices[] | select(.hostname | test("\($TS_NAME)(-[0-9]+)?")).nodeId'
 )
 
 if [[ ${#nodes[@]} -lt 1 ]]; then

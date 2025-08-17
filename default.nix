@@ -14,6 +14,8 @@ in
       '';
     in
     pkgs.mkShell {
+      inputsFrom = [(import ./racecourse/alt-assets).shell];
+
       packages = builtins.attrValues {
         inherit (pkgs)
           besu

@@ -34,7 +34,7 @@ const (
 	typeAvailableRacecourse = "Available"
 )
 
-var commonLabels = map[string]string{"app.kubernetes.io/name": "racecourse"}
+var commonLabels = map[string]string{"app": "racecourse"}
 
 // RacecourseReconciler reconciles a Racecourse object
 type RacecourseReconciler struct {
@@ -132,26 +132,32 @@ func (r *RacecourseReconciler) reconcileDeployment(ctx context.Context, req ctrl
 				return err
 			}
 
-			image := "localhost/racecourse:latest"
-
 			var desiredReplicas int32 = 0
 			if racecourse.Spec.Replicas != nil {
 				desiredReplicas = *racecourse.Spec.Replicas
 			}
 
-			if deployment.ObjectMeta.Labels == nil {
-				deployment.ObjectMeta.Labels = make(map[string]string, len(commonLabels))
+			var desiredImage string = "localhost/racecourse:latest"
+			if racecourse.Spec.Image != nil {
+				desiredImage = *racecourse.Spec.Image
 			}
-			maps.Copy(deployment.Labels, commonLabels)
+
+			labels := map[string]string{}
+			maps.Copy(labels, commonLabels)
+			labels["instance"] = racecourse.Name
+			if deployment.ObjectMeta.Labels == nil {
+				deployment.ObjectMeta.Labels = make(map[string]string, len(labels))
+			}
+			maps.Copy(deployment.ObjectMeta.Labels, labels)
 
 			deployment.Spec.Replicas = ptr.To(desiredReplicas)
-			deployment.Spec.Selector = &metav1.LabelSelector{MatchLabels: commonLabels}
+			deployment.Spec.Selector = &metav1.LabelSelector{MatchLabels: labels}
 
 			deployment.Spec.Template = corev1.PodTemplateSpec{
-				ObjectMeta: metav1.ObjectMeta{Labels: commonLabels},
+				ObjectMeta: metav1.ObjectMeta{Labels: labels},
 				Spec: corev1.PodSpec{
 					Containers: []corev1.Container{{
-						Image:           image,
+						Image:           desiredImage,
 						Name:            "racecourse",
 						ImagePullPolicy: corev1.PullNever,
 						Ports: []corev1.ContainerPort{{
@@ -234,12 +240,15 @@ func (r *RacecourseReconciler) reconcileService(ctx context.Context, racecourse 
 				return err
 			}
 
+			labels := map[string]string{}
+			maps.Copy(labels, commonLabels)
+			labels["instance"] = racecourse.Name
 			if service.ObjectMeta.Labels == nil {
-				service.ObjectMeta.Labels = make(map[string]string, len(commonLabels))
+				service.ObjectMeta.Labels = make(map[string]string, len(labels))
 			}
-			maps.Copy(service.Labels, commonLabels)
+			maps.Copy(service.ObjectMeta.Labels, labels)
 
-			service.Spec.Selector = commonLabels
+			service.Spec.Selector = labels
 			service.Spec.Ports = []corev1.ServicePort{{
 				Name:       "webapp",
 				Port:       3000,
@@ -276,10 +285,18 @@ func (r *RacecourseReconciler) reconcileIngress(ctx context.Context, racecourse 
 				return err
 			}
 
+			labels := map[string]string{}
+			maps.Copy(labels, commonLabels)
+			labels["instance"] = racecourse.Name
 			if ingress.ObjectMeta.Labels == nil {
-				ingress.ObjectMeta.Labels = make(map[string]string, len(commonLabels))
+				ingress.ObjectMeta.Labels = make(map[string]string, len(labels))
 			}
-			maps.Copy(ingress.Labels, commonLabels)
+			maps.Copy(ingress.ObjectMeta.Labels, labels)
+
+			if ingress.ObjectMeta.Annotations == nil {
+				ingress.ObjectMeta.Annotations = map[string]string{}
+			}
+			ingress.ObjectMeta.Annotations["nginx.ingress.kubernetes.io/affinity"] = "cookie"
 
 			host := ""
 			if racecourse.Spec.IngressHost != nil {
@@ -295,7 +312,7 @@ func (r *RacecourseReconciler) reconcileIngress(ctx context.Context, racecourse 
 							PathType: ptr.To(networkingv1.PathTypePrefix),
 							Backend: networkingv1.IngressBackend{
 								Service: &networkingv1.IngressServiceBackend{
-									Name: "racecourse",
+									Name: racecourse.Name,
 									Port: networkingv1.ServiceBackendPort{
 										Name: "webapp",
 									},

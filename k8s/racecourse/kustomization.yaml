@@ -5,6 +5,7 @@
 namespace: racecourse
 
 resources:
+  - ./racecourse-alt.yaml
   - ./racecourse.yaml
   - ../../racecourse-operator/config/default
 

@@ -1,0 +1,41 @@
+# SPDX-FileCopyrightText: 2025 Daniel Sampliner <samplinerD@gmail.com>
+#
+# SPDX-License-Identifier: GLWTPL
+
+namespace: tsnsrv
+nameSuffix: -racecourse-alt
+
+resources:
+  - ../../base
+
+labels:
+  - pairs:
+      instance: tsnsrv-racecourse-alt
+    includeSelectors: true
+
+commonAnnotations:
+  ts_hostname: racecourse-alt
+
+replacements:
+  - source:
+      kind: Deployment
+      name: tsnsrv
+      fieldPath: metadata.annotations.ts_hostname
+    targets:
+      - select:
+          kind: Deployment
+          name: tsnsrv
+        fieldPaths:
+          - spec.template.spec.containers.[name=tsnsrv].command.2
+          - spec.template.spec.initContainers.[name=nuke-old-ts].env.[name=TS_NAME].value
+
+  - source:
+      kind: Deployment
+      name: tsnsrv
+      fieldPath: metadata.labels
+    targets:
+      - select:
+          kind: Deployment
+          name: tsnsrv
+        fieldPaths:
+          - spec.template.spec.volumes.[name=ts-state].ephemeral.volumeClaimTemplate.metadata.labels

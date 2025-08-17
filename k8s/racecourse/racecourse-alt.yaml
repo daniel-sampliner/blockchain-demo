@@ -1,0 +1,14 @@
+# SPDX-FileCopyrightText: 2025 Daniel Sampliner <samplinerD@gmail.com>
+#
+# SPDX-License-Identifier: GLWTPL
+
+apiVersion: webapp.my.domain/v1alpha1
+kind: Racecourse
+metadata:
+  labels:
+    app.kubernetes.io/name: operator
+  name: racecourse-alt
+spec:
+  replicas: 3
+  image: localhost/racecourse:alt
+  ingressHost: racecourse-alt.liger-beaver.ts.net

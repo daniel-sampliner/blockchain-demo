@@ -80,6 +80,11 @@ func (in *RacecourseSpec) DeepCopyInto(out *RacecourseSpec) {
 		*out = new(int32)
 		**out = **in
 	}
+	if in.Image != nil {
+		in, out := &in.Image, &out.Image
+		*out = new(string)
+		**out = **in
+	}
 	if in.IngressHost != nil {
 		in, out := &in.IngressHost, &out.IngressHost
 		*out = new(string)

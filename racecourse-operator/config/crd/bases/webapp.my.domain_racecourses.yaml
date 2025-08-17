@@ -18,6 +18,9 @@ spec:
     - jsonPath: .spec.replicas
       name: Replicas
       type: integer
+    - jsonPath: .spec.image
+      name: Image
+      type: string
     - jsonPath: .spec.ingressHost
       name: IngressHost
       type: string
@@ -46,6 +49,9 @@ spec:
           spec:
             description: RacecourseSpec defines the desired state of Racecourse.
             properties:
+              image:
+                description: Image is the container image to use for the deployment
+                type: string
               ingressHost:
                 description: IngressHost is the host to use in the Ingress resource
                 type: string

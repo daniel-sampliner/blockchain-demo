@@ -6,17 +6,26 @@
 
 set -e
 
-CONTAINER_TOOL="${CONTAINER_TOOL:-docker}"
-IMAGE="localhost/${2:?}:latest"
+tag=latest
+image="localhost/${2:?}"
+extra_args=()
+if [[ ${2:?} == racecourse-alt ]]; then
+	tag=alt
+	image="localhost/racecourse"
+	extra_args+=(--build-arg VARIANT=alt)
+fi
+
+image="$image:$tag"
 
 declare -A image_dir=(
 	[loadbalancer]=LoadBalancer
+	[nuke-old-ts]=nuke-old-ts
+	[racecourse-alt]=racecourse
 	[racecourse-operator]=racecourse-operator
 	[racecourse]=racecourse
-	[nuke-old-ts]=nuke-old-ts
 )
 
-"$CONTAINER_TOOL" build -t "$IMAGE" "${image_dir[$2]}" >&2
-kind load docker-image "$IMAGE"
+docker build -t "$image" "${extra_args[@]}" "${image_dir[$2]}" >&2
+kind load docker-image "$image"
 
-"$CONTAINER_TOOL" image inspect "$IMAGE" -f '{{.Id}}'
+docker image inspect "$image" -f '{{.Id}}'

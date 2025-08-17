@@ -7,3 +7,4 @@ namespace: tsnsrv
 resources:
   - ./blockchain
   - ./racecourse
+  - ./racecourse-alt

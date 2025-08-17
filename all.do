@@ -13,6 +13,7 @@ if [[ -v WITH_TS ]]; then
 	deps+=(
 		apply-k8s-sops
 		blockchain.liger-beaver.ts.net.tscert
+		racecourse-alt.liger-beaver.ts.net.tscert
 		racecourse.liger-beaver.ts.net.tscert
 	)
 fi

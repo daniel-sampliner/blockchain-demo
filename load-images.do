@@ -8,6 +8,7 @@ set -e
 
 deps=(
 	loadbalancer.load
+	racecourse-alt.load
 	racecourse-operator.load
 	racecourse.load
 )

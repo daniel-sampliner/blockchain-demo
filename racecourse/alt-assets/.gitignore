@@ -2,9 +2,7 @@
 #
 # SPDX-License-Identifier: GLWTPL
 
-*
-!alt-assets
-!client
-!contracts
-!server
-**/node_modules
+download
+download.dir
+public
+src

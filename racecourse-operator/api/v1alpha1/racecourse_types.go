@@ -19,6 +19,9 @@ type RacecourseSpec struct {
 	// Replicas is the number of replicas in the deployment
 	Replicas *int32 `json:"replicas,omitempty"`
 
+	// Image is the container image to use for the deployment
+	Image *string `json:"image,omitempty"`
+
 	// IngressHost is the host to use in the Ingress resource
 	IngressHost *string `json:"ingressHost,omitempty"`
 }
@@ -37,6 +40,7 @@ type RacecourseStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:subresource:scale:specpath=.spec.replicas,statuspath=.status.replicas,selectorpath=.status.selector
 // +kubebuilder:printcolumn:name="Replicas",type=integer,JSONPath=`.spec.replicas`
+// +kubebuilder:printcolumn:name="Image",type=string,JSONPath=`.spec.image`
 // +kubebuilder:printcolumn:name="IngressHost",type=string,JSONPath=`.spec.ingressHost`
 
 // Racecourse is the Schema for the racecourses API.

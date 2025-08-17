@@ -6,7 +6,7 @@
 
 set -e
 
-redo apply-k8s-sops
+redo apply-k8s-sops nuke-old-ts.load
 
 sleep 1
 kubectl --namespace tsnsrv wait \
