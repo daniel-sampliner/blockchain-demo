@@ -8,16 +8,18 @@ set -e
 
 redo-always
 
-deps=(
+deps=()
+
+if [[ -v WITH_TS ]]; then
+	deps+=(nuke-old-ts.build)
+fi
+
+deps+=(
 	loadbalancer.build
 	racecourse-alt.build
 	racecourse-operator.build
 	racecourse.build
 )
-
-if [[ -v WITH_TS ]]; then
-	deps+=(nuke-old-ts.build)
-fi
 
 redo-ifchange "${deps[@]}"
 
