@@ -66,10 +66,15 @@ Deploys:
     FIELDS:
        image	<string>
          Image is the container image to use for the deployment
-
+    
        ingressHost	<string>
          IngressHost is the host to use in the Ingress resource
-
+    
        replicas	<integer>
          Replicas is the number of replicas in the deployment
+    
+       restartTrigger	<string>
+         RestartTrigger allows the managed deployment to be rolling restarted
     ```
+
+    Updating the `restartTrigger` field of the spec will cause the managed `Deployment` to be rolling restarted.

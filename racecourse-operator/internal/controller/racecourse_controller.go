@@ -154,7 +154,10 @@ func (r *RacecourseReconciler) reconcileDeployment(ctx context.Context, req ctrl
 			deployment.Spec.Selector = &metav1.LabelSelector{MatchLabels: labels}
 
 			deployment.Spec.Template = corev1.PodTemplateSpec{
-				ObjectMeta: metav1.ObjectMeta{Labels: labels},
+				ObjectMeta: metav1.ObjectMeta{
+					Labels:      labels,
+					Annotations: map[string]string{},
+				},
 				Spec: corev1.PodSpec{
 					Containers: []corev1.Container{{
 						Image:           desiredImage,
@@ -166,6 +169,17 @@ func (r *RacecourseReconciler) reconcileDeployment(ctx context.Context, req ctrl
 						}},
 					}},
 				},
+			}
+
+			if racecourse.Spec.RestartTrigger != "" {
+				if deployment.Spec.Template.Annotations == nil {
+					deployment.Spec.Template.Annotations = map[string]string{}
+				}
+				deployment.Spec.Template.Annotations["kubectl.kubernetes.io/restartedAt"] = racecourse.Spec.RestartTrigger
+			} else {
+				if deployment.Spec.Template.Annotations != nil {
+					delete(deployment.Spec.Template.Annotations, "kubectl.kubernetes.io/restartedAt")
+				}
 			}
 
 			return nil

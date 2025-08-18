@@ -24,6 +24,9 @@ type RacecourseSpec struct {
 
 	// IngressHost is the host to use in the Ingress resource
 	IngressHost *string `json:"ingressHost,omitempty"`
+
+	// RestartTrigger allows the managed deployment to be rolling restarted
+	RestartTrigger string `json:"restartTrigger,omitempty"`
 }
 
 // RacecourseStatus defines the observed state of Racecourse.

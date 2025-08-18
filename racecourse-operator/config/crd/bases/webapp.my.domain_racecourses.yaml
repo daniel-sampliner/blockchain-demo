@@ -59,6 +59,10 @@ spec:
                 description: Replicas is the number of replicas in the deployment
                 format: int32
                 type: integer
+              restartTrigger:
+                description: RestartTrigger allows the managed deployment to be rolling
+                  restarted
+                type: string
             type: object
           status:
             description: RacecourseStatus defines the observed state of Racecourse.
